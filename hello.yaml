@@ -22,3 +22,7 @@ spec:
         image: mukeshpanigrahi/hello-world-repo
         ports:
         - containerPort: 80
+      - name: mysql
+        image: mysql/mysql-server
+        ports:
+        - containerPort: 3306
