@@ -17,6 +17,7 @@ spec:
     metadata:
       labels:
         app: web
+        temp: test
     spec:
       containers:
       - name: hello-world
