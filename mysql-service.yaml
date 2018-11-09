@@ -1,0 +1,23 @@
+# expose a pod on mysql.default.svc.cluster.local to the rest of the cluster
+
+apiVersion: v1
+# https://kubernetes.io/docs/concepts/services-networking/service/
+kind: Service
+metadata:
+  # the name mysql here means you can reference the pod
+  # using the host mysql.default.svc.cluster.local from within the cluster
+  name: mysql
+  labels:
+    "mukesh/example": lamp
+spec:
+  # allows us to set our own internal IP to reference this pod
+  # in this case we care about the port
+  # https://kubernetes.io/docs/concepts/services-networking/service/#choosing-your-own-ip-address
+  type: ClusterIP
+  ports:
+  # make the service available on this port within the cluster
+  - port: 3306
+    protocol: TCP
+  # apply this service to the pod with the label app: mysql
+  selector:
+    app: mysql

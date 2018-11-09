@@ -1,0 +1,31 @@
+# expose PHP and Apache on port 80 to the world through a load balancer
+
+apiVersion: v1
+# https://kubernetes.io/docs/concepts/services-networking/service/
+kind: Service
+metadata:
+  # the name web here means you can reference the PHP pods
+  # using the host web.default.svc.cluster.local from within the cluster
+  name: web
+  labels:
+    "mukesh/example": lamp
+spec:
+  ports:
+  # make the service available on this port
+  - port: 80
+    protocol: TCP
+  selector:
+    # apply this service to the pod with the label 
+    # app: mysql
+    app: php-dbconnect
+  # a LoadBalancer makes this service available over the public internet
+  # all of our PHP/Apache pods are load balanced behind a single public network address
+
+  # this works because we have cloudprovider=GCP set on the cluster
+  # try running "kubectl get service web -o wide" after you create the Service
+  # You'll get a lengthy DNS name which you can use with a DNS CNAME entry with your own domain
+  # this is where the PHP app will be publicly viewable
+
+  # https://kubernetes.io/docs/getting-started-guides/scratch/#cloud-providers
+  # https://kubernetes.io/docs/concepts/services-networking/service/#type-loadbalancer
+  type: LoadBalancer

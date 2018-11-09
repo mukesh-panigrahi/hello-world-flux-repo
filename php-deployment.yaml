@@ -1,0 +1,74 @@
+#deploy the PHP and Apache container from mukeshpanigrahi/hello-world-repo
+
+apiVersion: extensions/v1beta1
+# https://kubernetes.io/docs/concepts/workloads/controllers/deployment/
+kind: Deployment
+metadata:
+  name: php-dbconnect
+  labels:
+    heptio.com/example: lamp
+# number of PHP pods (replicas) to run
+# increase this number if you need to scale PHP horizontally
+# since we have 2, the LoadBalancer will serve our app from all 2
+spec:
+  replicas: 2
+  # The number of old deployments you want to keep around
+  revisionHistoryLimit: 5
+  # make replicas of kubernetes objects with the label app: php-dbconnect
+  selector:
+    matchLabels:
+      app: php-dbconnect
+  # the pod template describes what type of pod to create
+  # when the defined number of replicas are not up
+  # in this case, the pod that will be created is the one labeled app: php-dbconnect
+  template:
+    metadata:
+      # this label is referenced by the selector for the Deployment, which creates pods
+      # and by the selector for the Service, which creates the LoadBalancer
+      labels:
+        app: php-dbconnect
+    # details of what container(s) will actually be run in this pod
+    spec:
+      # deploys PHP and Apache and our custom application from the specified Docker Hub image
+      containers:
+      # deploys this custom PHP image from Docker Hub
+      # https://hub.docker.com/r/heptio/example-php-dbconnect/
+      - image: mukeshpanigrahi/hello-world-repo
+        # download a fresh copy of the image if available, even if it has the same version label
+        imagePullPolicy: Always
+        name: php-dbconnect
+        #reserving resources from our cluster
+        resources:
+          requests:
+            cpu: 100m
+            memory: 1Gi
+        # env sets environment variables in the container
+        # exactly like environment variables set from the command line
+        env:
+          # The PHP image will configure an environment variable with the value of MYSQL_USER...
+          - name: MYSQL_USER
+            valueFrom:
+              # rather than embed sensitive details in this config
+              # we reference another Kubernetes object
+              # in this case, the Secret with the name: mysql-credentials
+              secretKeyRef:
+                name: mysql-credentials
+                # references the user key-value pair from the mysql-credentials Secret
+                key: user
+          # ... and a password of the value of MYSQL_PASSWORD ...
+          - name: MYSQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql-credentials
+                key: password
+          # ... and the MYSQL_HOST mysql.default.svc.cluster.local
+          # which comes from the Service with the name mysql in the mysql.yaml file
+          - name: MYSQL_HOST
+            value: mysql.default.svc.cluster.local
+        # https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/
+        livenessProbe:
+          tcpSocket:
+            port: 80
+        # make our mysql pod available within the cluster on port 80
+        ports:
+        - containerPort: 80
