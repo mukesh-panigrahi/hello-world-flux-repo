@@ -6,7 +6,7 @@ kind: Deployment
 metadata:
   name: php-dbconnect
   labels:
-    heptio.com/example: lamp
+    "mukesh/example": lamp
 # number of PHP pods (replicas) to run
 # increase this number if you need to scale PHP horizontally
 # since we have 2, the LoadBalancer will serve our app from all 2
