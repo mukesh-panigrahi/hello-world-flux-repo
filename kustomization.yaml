@@ -1,0 +1,11 @@
+# Example configuration for the webserver
+commonLabels:
+  app: php-hello-world
+
+resources:
+- secrets.yaml
+- mysql-deployment.yaml
+- mysql-service.yaml
+- php-deployment.yaml
+- php-service.yaml
+- data-loader-job.yaml
