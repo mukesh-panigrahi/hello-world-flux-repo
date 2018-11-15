@@ -7,6 +7,9 @@ metadata:
   name: php-dbconnect
   labels:
     "mukesh/example": lamp
+  annotations:
+    flux.weave.works/automated: "true"
+    flux.weave.works/tag.php-dbconnect: glob:*
 # number of PHP pods (replicas) to run
 # increase this number if you need to scale PHP horizontally
 # since we have 2, the LoadBalancer will serve our app from all 2
