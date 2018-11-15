@@ -134,7 +134,7 @@ spec:
               name: mysql-credentials
         - name: MYSQL_HOST
           value: mysql.default.svc.cluster.local
-        image: mukeshpanigrahi/hello-world-repo:v2
+        image: mukeshpanigrahi/hello-world-repo:v3
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
