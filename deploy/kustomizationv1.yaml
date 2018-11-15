@@ -1,3 +1,4 @@
+---
 apiVersion: v1
 data:
   password: dmFyTXlEQlBhc3M=
@@ -133,7 +134,7 @@ spec:
               name: mysql-credentials
         - name: MYSQL_HOST
           value: mysql.default.svc.cluster.local
-        image: mukeshpanigrahi/hello-world-repo
+        image: mukeshpanigrahi/hello-world-repo:v1
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
