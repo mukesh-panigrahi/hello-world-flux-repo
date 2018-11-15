@@ -64,7 +64,7 @@ spec:
         resources:
           requests:
             cpu: 1
-            memory: 2Gi
+            memory: 1Gi
         # env sets environment variables in the container
         # exactly like environment variables set from the command line
         env:
