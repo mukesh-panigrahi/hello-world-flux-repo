@@ -88,7 +88,7 @@ spec:
         resources:
           requests:
             cpu: 1
-            memory: 1Gi
+            memory: 512Mi
         volumeMounts:
         - mountPath: /var/lib/mysql
           name: database
@@ -133,7 +133,7 @@ spec:
               name: mysql-credentials
         - name: MYSQL_HOST
           value: mysql.default.svc.cluster.local
-        image: mukeshpanigrahi/hello-world-repo
+        image: mukeshpanigrahi/hello-world-repo:v5
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
@@ -144,7 +144,7 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 1Gi
+            memory: 512Mi
 ---
 apiVersion: batch/v1
 kind: Job
@@ -177,7 +177,7 @@ spec:
               name: mysql-credentials
         - name: MYSQL_HOST
           value: mysql.default.svc.cluster.local
-        image: mukeshpanigrahi/hello-world-repo
+        image: mukeshpanigrahi/hello-world-repo:v5
         name: mysql-data-loader
       restartPolicy: OnFailure
 ---
