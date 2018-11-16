@@ -36,7 +36,7 @@ spec:
       containers:
       # deploys this custom PHP image from Docker Hub
       # https://hub.docker.com/r/heptio/example-php-dbconnect/
-      - image: gcr.io/searce-sandbox/helloworldrepo
+      - image: gcr.io/searce-sandbox/helloworldrepo@sha256:f0c77c1a0c06b5bf8db21522f6d5ec711e53ad37431684bd6ddcbcdc8c73a0dd
         # download a fresh copy of the image if available, even if it has the same version label
         imagePullPolicy: Always
         name: php-dbconnect
