@@ -120,7 +120,7 @@ spec:
         app: php-hello-world
     spec:
       containers:
-        env:
+      - env:
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
