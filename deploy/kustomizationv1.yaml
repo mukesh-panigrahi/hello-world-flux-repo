@@ -120,7 +120,7 @@ spec:
         app: php-hello-world
     spec:
       containers:
-      - env:
+        env:
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
@@ -133,7 +133,7 @@ spec:
               name: mysql-credentials
         - name: MYSQL_HOST
           value: mysql.default.svc.cluster.local
-        image: gcr.io/searce-sandbox/helloworldrepo
+        image: mukeshpanigrahi/hello-world-repo
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
