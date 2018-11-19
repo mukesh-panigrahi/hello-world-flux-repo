@@ -14,7 +14,7 @@ metadata:
 # increase this number if you need to scale PHP horizontally
 # since we have 2, the LoadBalancer will serve our app from all 2
 spec:
-  replicas: 2
+  replicas: 3
   # The number of old deployments you want to keep around
   revisionHistoryLimit: 5
   # make replicas of kubernetes objects with the label app: php-dbconnect

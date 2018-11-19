@@ -109,7 +109,7 @@ metadata:
     mukesh/example: lamp
   name: php-dbconnect
 spec:
-  replicas: 2
+  replicas: 3
   revisionHistoryLimit: 5
   selector:
     matchLabels:
