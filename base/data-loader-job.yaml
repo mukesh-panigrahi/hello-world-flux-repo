@@ -27,7 +27,7 @@ spec:
         # it's just convenient to have our PHP app and our data loader script packaged together
         # make sure the host image for your script has any utilities the script needs
         # like curl and mysql-client, in our case
-        image: mukeshpanigrahi/hello-world-repo:v5
+        image: heptio/example-php-dbconnect
         # env sets environment variables in the container
         # exactly like environment variables set from the command line
         env:

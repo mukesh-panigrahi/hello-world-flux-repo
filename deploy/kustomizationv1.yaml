@@ -133,7 +133,7 @@ spec:
               name: mysql-credentials
         - name: MYSQL_HOST
           value: mysql.default.svc.cluster.local
-        image: mukeshpanigrahi/hello-world-repo:v5
+        image: gcr.io/searce-sandbox/helloworldrepo
         imagePullPolicy: Always
         livenessProbe:
           tcpSocket:
@@ -177,7 +177,7 @@ spec:
               name: mysql-credentials
         - name: MYSQL_HOST
           value: mysql.default.svc.cluster.local
-        image: mukeshpanigrahi/hello-world-repo:v5
+        image: heptio/example-php-dbconnect
         name: mysql-data-loader
       restartPolicy: OnFailure
 ---
