@@ -1,1 +1,18 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: kustomize-test
+  name: kustomize-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kustomize-test
+  template:
+    metadata:
+      labels:
+        app: kustomize-test
+    spec:
+      containers:
+      - image: gcr.io/searce-sandbox/abc:5f6770d
