@@ -1,18 +1,22 @@
+controllers/nginx-deployment.yaml  
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  name: nginx-deployment
   labels:
-    app: kustomize-test
-  name: kustomize-test
+    app: nginx
 spec:
-  replicas: 1
+  replicas: 3
   selector:
     matchLabels:
-      app: kustomize-test
+      app: nginx
   template:
     metadata:
       labels:
-        app: kustomize-test
+        app: nginx
     spec:
       containers:
-      - image: gcr.io/searce-sandbox/abc:5f6770d
+      - name: nginx
+        image: gcr.io/searce-sandbox/abc:5f6770d
+        ports:
+        - containerPort: 80
