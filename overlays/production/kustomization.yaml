@@ -1,21 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
   labels:
-    app: nginx
+    app: kustomize-test
+  name: kustomize-test
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: kustomize-test
   template:
     metadata:
       labels:
-        app: nginx
+        app: kustomize-test
     spec:
       containers:
-      - name: nginx
-        image: gcr.io/searce-sandbox/abc:5f6770d
+      - image: gcr.io/searce-sandbox/abc:d15905e
+        name: kustomize-test
         ports:
-        - containerPort: 80
