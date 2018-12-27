@@ -1,3 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kustomize-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: kustomize-test
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -15,7 +27,7 @@ spec:
         app: kustomize-test
     spec:
       containers:
-      - image: gcr.io/searce-sandbox/abc:f61ce56
+      - image: gcr.io/searce-sandbox/abc:402a19e
         name: kustomize-test
         ports:
-          containerPort: 80
+        - containerPort: 80
