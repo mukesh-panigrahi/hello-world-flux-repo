@@ -9,6 +9,7 @@ spec:
     targetPort: 80
   selector:
     app: kustomize-test
+  type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -27,7 +28,7 @@ spec:
         app: kustomize-test
     spec:
       containers:
-      - image: gcr.io/searce-sandbox/abc:402a19e
+      - image: gcr.io/searce-sandbox/abc:5baa800
         name: kustomize-test
         ports:
         - containerPort: 80
